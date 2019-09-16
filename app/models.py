@@ -1,15 +1,27 @@
-class News:
+class Sources:
     '''
-    News class to define News Objects
+    Source class to define sources Objects
     '''
     
-    def __init__(self,id,title,overview,vote_average,vote_count):
-        self.id =id
+    def __init__(self,author,title,imageurl,description,url):
+        self.author = author
         self.title = title
-        self.overview = overview
-        self.vote_average = vote_average
-        self.vote_count = vote_count
+        self.imageurl = imageurl
+        self.description = description
+        self.url = url
         
+class Articles:
+    '''
+    Articles class define articles objects
+    '''
+    def __init__(self,author,title,description,url,urlToImage,publishedAt):
+        self.author = author
+        self.title = title
+        self.description = description
+        self.url = url
+        self.urlToImage = urlToImage
+        self.publishedAt = publishedAt
+            
         
 class Review:
     
