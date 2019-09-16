@@ -28,4 +28,4 @@ def source(source_id):
     news_articles = get_article(source_id)
     
     title = 'Article - Welcome to articles'
-    return render_template('articles.html'.id = source_id, title = title, article= news_articles)  
+    return render_template('articles.html',id = source_id, title = title, article= news_articles)  
