@@ -5,20 +5,20 @@ from datetime import datetime
 #Getting api key
 api_key = None
 #Getting the news base url
-article_url = None
-source_url = None
+# NEWS_API_KEY = None
+# NEWS_API_BASE_URL = None
 
 def configure_request(app):
-    global api_key,base_url, articles_url
+    global api_key,NEWS_API_BASE_URL, NEWS_API_KEY
     api_key = app.config['NEWS_API_KEY']
-    base_url = app.config['NEWS_BASE_URL']
-    articles_url = app.config['NEWS_ARTICLES_BASE_URL']
+    NEWS_API_BASE_URL = app.config['NEWS_API_BASE_URL']
+    NEWS_API_KEY = app.config['NEWS_API_KEY']
     
 def get_source(category):
     '''
     function that gets the json response to our url request
     '''
-    get_source_url = source_url.format(category,api_key)
+    get_source_url = NEWS_API_BASE_URL.format(category,api_key)
     print(get_source_url)
     
     with urllib.request.urlopen(get_source_url) as url:
@@ -30,6 +30,8 @@ def get_source(category):
         if get_source_response['sources']:
             sources_results_list = get_source_response['sources']
             sources_result = process_sources(sources_results_list)
+            print(sources_result)
+            
             
     return sources_result  
 
@@ -47,7 +49,7 @@ def process_sources(sources_list):
         title = source_item.get('title')
         imageurl = source_item.get('urltoimage')
         description = source_item.get('description')
-        url =       source_item.get('url')
+        url = source_item.get('url')
         
         sources_object = Sources(author, title,imageurl,description,url)
         sources_result.append(sources_object)

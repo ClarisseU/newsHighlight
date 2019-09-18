@@ -1,17 +1,18 @@
-{% extends 'base.html' %} {% import 'macros.html' as macro %} {% block content %}
+{% extends 'base.html'%} {% import 'macros.html' as macro%} {% block content %}
+
 <div class="container">
     <h3>Business News Sources</h3>
 
-    {{macro.displaySourceList(sources)}}
+    {{macro.displaySourceList(news_sources2)}}
 
-    <h3>Technology News Sources</h3>
-    {{macro.displaySourceList(technology_sources)}}
+    <!-- <h3>Technology News Sources</h3>
+    {{macro.displaySourceList(technology_sources)}} -->
 
     <h3>Entertainment News Sources</h3>
-    {{macro.displaySourceList(entertainment_sources)}}
+    {{macro.displaySourceList(news_sources)}}
 
     <h3>Sports News Sources</h3>
-    {{macro.displaySourceList(sports_sources)}}
+    {{macro.displaySourceList(news_sources1)}}
 
 </div>
 {% endblock %}
