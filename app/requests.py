@@ -7,10 +7,12 @@ api_key = None
 #Getting the news base url
 # NEWS_API_KEY = None
 # NEWS_API_BASE_URL = None
+ARTICLE = None
 
 def configure_request(app):
-    global api_key,NEWS_API_BASE_URL, NEWS_API_KEY
+    global api_key,NEWS_API_BASE_URL,NEWS_API_KEY,ARTICLE
     api_key = app.config['NEWS_API_KEY']
+    ARTICLE = app.config['ARTICLE']
     NEWS_API_BASE_URL = app.config['NEWS_API_BASE_URL']
     NEWS_API_KEY = app.config['NEWS_API_KEY']
     
@@ -50,8 +52,9 @@ def process_sources(sources_list):
         imageurl = source_item.get('urltoimage')
         description = source_item.get('description')
         url = source_item.get('url')
+        id = source_item.get('id')
         
-        sources_object = Sources(author, title,imageurl,description,url)
+        sources_object = Sources(author, title,imageurl,description,url,id)
         sources_result.append(sources_object)
         
     return sources_result
@@ -60,14 +63,17 @@ def get_articles(id):
     '''
     Function that processes the articles and returns a list of articles objects
     '''
-    get_articles_url = articles_url.format(id,api_key)
+    get_articles_url = ARTICLE.format(id,api_key)
+    print(get_articles_url)
     
     with urllib.request.urlopen(get_articles_url) as url:
-        articles_result = json.loads(url.read())
+        article_data = url.read()
+        articles_response = json.loads(article_data)
         
         articles_object = None
-        if articles_result['articles']:
-            articles_object = process_articles(articles_result['articles'])
+        if articles_response['articles']:
+            response_list= articles_response['articles']
+            articles_object = process_articles(response_list)
             
     return articles_object
 
@@ -77,7 +83,7 @@ def process_articles(articles_list):
     '''
     articles_object = []
     for article_item in articles_list:
-        author = article_item.get('author')
+        author = article_item.get('name')
         title = article_item.get('title')
         description = article_item.get('description')
         url = article_item.get('url')

@@ -11,10 +11,29 @@
             </div>
             <div class="panel-body">
 
-                <a href="/everything/{{sources.id}}" class="btn btn-success btn-sm">Visit {{sources.url}}</a>
+                <a href="{{sources.url}}"><button type="button" class="btn btn-info">click to visit source</button></a>
+                <a href="/everything/{{sources.id}}" class="btn btn-success btn-sm">Visit to view articles</a>
             </div>
         </div>
     </div>
     {% endfor%} {% endmacro %}
+    <div class="col-md-3">
+        <div class="panel panel-defualt">
+            <div class="panel-heading">
+                {% macro displayArticleList(articles_list) %} {% for articles in articles_list %}
+                <a href='/everything/{{articles.id}}'>
+                           {{articles.description}}
+                           </a>
+            </div>
+            <div class="panel-body">
+                {{articles.urlToImage}}
+
+                <a href="/everything/{{articles.id}}" class="btn btn-success btn-sm">Visit {{articles.url}}</a>
+
+            </div>
+        </div>
+    </div>
+    {% endfor%} {% endmacro %}
+
 
 </div>

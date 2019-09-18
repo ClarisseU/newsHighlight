@@ -24,7 +24,8 @@ def source(source_id):
     '''
     Function to view  the source page and it returns the article page
     '''
-    news_articles = get_article(source_id)
+    news_articles = get_articles(source_id)
+    print(news_articles)
     
     title = 'Article - Welcome to articles'
     return render_template('articles.html',id = source_id, title = title, article= news_articles)  
